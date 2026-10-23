@@ -1,0 +1,234 @@
+/* ─────────────────────────────────────────
+   responsive.css
+   
+   Media queries make the layout adapt to
+   different screen sizes. We use three sizes:
+   
+   Desktop  → above 900px  (default styles above)
+   Tablet   → 600–900px    (@media max-width: 900px)
+   Mobile   → below 600px  (@media max-width: 600px)
+   ───────────────────────────────────────── */
+
+
+/* ════════════════════════════════════════
+   TABLET (≤ 900px)
+   ════════════════════════════════════════ */
+@media (max-width: 900px) {
+
+  /* Gallery rooms: 2×2 grid instead of 4-in-a-row */
+  .rooms-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 600px;
+    gap: var(--space-2);
+  }
+
+  /* Archway cards slightly shorter on tablet */
+  .arch-card {
+    min-height: 260px;
+  }
+
+  /* Albums: 2 columns */
+  .albums-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Gallery masonry: 2 columns */
+  .gallery-masonry {
+    columns: 2;
+  }
+
+  /* Intro title slightly smaller */
+  .intro-title {
+    font-size: var(--text-3xl);
+  }
+
+  /* Welcome card name smaller */
+  .welcome-card__name {
+    font-size: var(--text-2xl);
+  }
+
+  /* Rooms screen: allow scrolling on tablet */
+  #screen-rooms {
+    justify-content: flex-start;
+    padding-top: var(--space-6);
+    overflow-y: auto;
+  }
+}
+
+
+/* ════════════════════════════════════════
+  MOBILE (≤ 600px)
+   ════════════════════════════════════════ */
+@media (max-width: 600px) {
+
+  /* ── Password Screen ── */
+  .invitation-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+  }
+
+  .wax-seal {
+    width: 70px;
+    height: 70px;
+  }
+
+  .wax-seal__inner {
+    font-size: 1.2rem;
+  }
+
+  .password-form {
+    max-width: 280px;
+  }
+
+  /* Candle glows larger relative to screen on mobile */
+  .candle-glow {
+    width: 60vw;
+    height: 60vw;
+  }
+
+  /* ── Welcome Card ── */
+  .welcome-card {
+    padding: var(--space-4) var(--space-3);
+  }
+
+  .welcome-card__name {
+    font-size: var(--text-xl);
+  }
+
+  .welcome-card__quote {
+    font-size: var(--text-base);
+  }
+
+  /* ── Intro Screen ── */
+  .intro-title {
+    font-size: var(--text-2xl);
+    letter-spacing: 0.04em;
+  }
+
+  .intro-subtitle {
+    font-size: var(--text-xs);
+  }
+
+  /* ── Gallery Rooms ── */
+  .rooms-grid {
+    grid-template-columns: 1fr; /* Single column on mobile */
+    max-width: 100%;
+  }
+
+  .arch-card {
+    min-height: 180px;
+    border-radius: 40% 40% 0 0 / 20% 20% 0 0;
+  }
+
+  #screen-rooms {
+    justify-content: flex-start;
+    padding-top: var(--space-4);
+    overflow-y: auto;
+  }
+
+  .rooms-header {
+    padding-top: var(--space-2);
+  }
+
+  /* ── Room Detail (Albums) ── */
+  #screen-room-detail {
+    padding: var(--space-3) var(--space-3) var(--space-7);
+  }
+
+  .room-detail-header__title {
+    font-size: var(--text-xl);
+  }
+
+  .albums-grid {
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: var(--space-5);
+  }
+
+  .album-search {
+    width: 100%;
+  }
+
+  /* ── Gallery (Exhibition Room) ── */
+  #screen-gallery {
+    padding: var(--space-3) var(--space-3) var(--space-7);
+  }
+
+  .gallery-masonry {
+    columns: 1; /* Single column on mobile */
+  }
+
+  .gallery-header__title {
+    font-size: var(--text-xl);
+  }
+
+  /* ── Lightbox ── */
+  .lightbox__nav {
+    padding: var(--space-1) var(--space-2);
+    font-size: var(--text-xl);
+  }
+
+  .lightbox__image {
+    max-height: 65vh;
+    max-width: 95vw;
+  }
+
+  .lightbox__caption {
+    font-size: var(--text-base);
+  }
+
+  .lightbox__nav--prev { left: 0; }
+  .lightbox__nav--next { right: 0; }
+
+  /* ── Video Modal ── */
+  .video-modal__stage {
+    width: 95vw;
+  }
+}
+
+
+/* ════════════════════════════════════════
+   TOUCH DEVICE: remove hover effects that 
+   feel wrong on touchscreens
+   ════════════════════════════════════════ */
+@media (hover: none) {
+  .arch-card:hover {
+    transform: none;
+  }
+
+  .album-frame:hover {
+    transform: none;
+  }
+
+  .gallery-item:hover {
+    transform: rotate(var(--frame-tilt));
+  }
+}
+
+
+/* ════════════════════════════════════════
+   REDUCED MOTION: respect user preference
+   for less animation (accessibility)
+   ════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Still show things, just without the animations */
+  .invitation-label,
+  .intro-title .letter,
+  .intro-subtitle,
+  .intro-year,
+  .welcome-card,
+  .enter-gallery-link,
+  .album-frame,
+  .gallery-item,
+  .arch-card {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}

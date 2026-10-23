@@ -1,0 +1,247 @@
+/* ─────────────────────────────────────────
+   animations.css
+   
+   All keyframe animations live here.
+   
+   A "keyframe" animation defines how something
+   looks at the START (0%) and END (100%) of an
+   animation, and the browser fills in everything
+   in between. You attach these to elements using
+   the "animation" CSS property elsewhere.
+   ───────────────────────────────────────── */
+
+
+/* ── SCREEN TRANSITIONS ──────────────────────── */
+
+/* Screens fade in when they become active */
+@keyframes screenFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Elements that slide up slightly as they appear */
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ── PASSWORD SCREEN ──────────────────────────── */
+
+/* Wrong password: input shakes left and right */
+@keyframes shake {
+  0%   { transform: translateX(0); }
+  15%  { transform: translateX(-10px); }
+  30%  { transform: translateX(10px); }
+  45%  { transform: translateX(-8px); }
+  60%  { transform: translateX(8px); }
+  75%  { transform: translateX(-4px); }
+  90%  { transform: translateX(4px); }
+  100% { transform: translateX(0); }
+}
+
+/* The wax seal gently pulses */
+@keyframes sealPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(201, 168, 76, 0.3),
+                0 0 60px rgba(201, 168, 76, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(201, 168, 76, 0.5),
+                0 0 80px rgba(201, 168, 76, 0.2);
+  }
+}
+
+/* The invitation label text fades up into view */
+@keyframes invitationAppear {
+  from {
+    opacity: 0;
+    letter-spacing: 0.4em;
+  }
+  to {
+    opacity: 1;
+    letter-spacing: 0.25em;
+  }
+}
+
+
+/* ── CANDLE GLOW (Password Screen) ───────────────
+   These simulate a warm, flickering candlelight
+   in the corners of the screen.
+   Four different animations so each corner flickers
+   at its own rhythm. ───────────────────────────── */
+
+@keyframes candleFlickerTL {
+  0%   { opacity: 0.6; transform: scale(1); }
+  25%  { opacity: 0.8; transform: scale(1.05); }
+  50%  { opacity: 0.5; transform: scale(0.97); }
+  75%  { opacity: 0.75; transform: scale(1.03); }
+  100% { opacity: 0.6; transform: scale(1); }
+}
+
+@keyframes candleFlickerTR {
+  0%   { opacity: 0.7; transform: scale(1.02); }
+  33%  { opacity: 0.5; transform: scale(0.98); }
+  66%  { opacity: 0.8; transform: scale(1.04); }
+  100% { opacity: 0.7; transform: scale(1.02); }
+}
+
+@keyframes candleFlickerBL {
+  0%   { opacity: 0.5; transform: scale(0.98); }
+  40%  { opacity: 0.75; transform: scale(1.03); }
+  80%  { opacity: 0.6; transform: scale(1); }
+  100% { opacity: 0.5; transform: scale(0.98); }
+}
+
+@keyframes candleFlickerBR {
+  0%   { opacity: 0.65; transform: scale(1.01); }
+  20%  { opacity: 0.85; transform: scale(1.05); }
+  60%  { opacity: 0.5; transform: scale(0.97); }
+  100% { opacity: 0.65; transform: scale(1.01); }
+}
+
+
+/* ── WELCOME CARD ────────────────────────────── */
+
+/* The card fades in and rises gently from below */
+@keyframes cardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* The "Enter the Gallery" link appears after the card */
+@keyframes linkAppear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.7;
+  }
+}
+
+/* The warm glow behind the card breathes gently */
+@keyframes glowBreath {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+
+/* ── GRAND ENTRANCE (Intro Screen) ────────────── */
+
+/* Each letter of the exhibition title reveals itself */
+@keyframes letterReveal {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* The golden shimmer sweep across the title text */
+@keyframes goldShimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Subtitle fades in below the title */
+@keyframes subtitleFade {
+  from { opacity: 0; }
+  to   { opacity: 0.7; }
+}
+
+/* Roman numeral year appears last */
+@keyframes yearAppear {
+  from {
+    opacity: 0;
+    letter-spacing: 0.5em;
+  }
+  to {
+    opacity: 0.4;
+    letter-spacing: 0.3em;
+  }
+}
+
+
+/* ── GALLERY ELEMENTS ────────────────────────── */
+
+/* Each framed piece rises into view as the room loads */
+@keyframes frameRise {
+  from {
+    opacity: 0;
+    transform: translateY(24px) rotate(var(--frame-tilt, 0deg));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(var(--frame-tilt, 0deg));
+  }
+}
+
+/* Video frames pulse softly to show they're "alive" */
+@keyframes videoGlow {
+  0%, 100% {
+    box-shadow: var(--frame-shadow-default),
+                0 0 20px rgba(201, 168, 76, 0.1);
+  }
+  50% {
+    box-shadow: var(--frame-shadow-default),
+                0 0 35px rgba(201, 168, 76, 0.3);
+  }
+}
+
+/* Room archways glow when first appearing */
+@keyframes archReveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ── LIGHTBOX ────────────────────────────────── */
+
+/* The lightbox fades to black */
+@keyframes lightboxOpen {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* The photo inside the lightbox fades in */
+@keyframes lightboxImageIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

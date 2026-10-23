@@ -1,0 +1,520 @@
+/* ─────────────────────────────────────────
+   components.css
+   Reusable visual pieces: frames, placards,
+   archway doors, lightbox, video modal.
+   ───────────────────────────────────────── */
+
+
+/* ════════════════════════════════════════
+   ARCHWAY ROOM CARDS (Screen 4)
+   ════════════════════════════════════════ */
+
+.arch-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: var(--space-4);
+  min-height: 340px;
+  cursor: pointer;
+  overflow: hidden;
+
+  /* The arch shape: top is rounded like a doorway arch */
+  border-radius: 50% 50% 0 0 / 30% 30% 0 0;
+
+  background: var(--bg-card);
+  border: 1px solid rgba(201, 168, 76, 0.1);
+  transition: transform var(--transition-hover),
+              box-shadow var(--transition-hover),
+              border-color var(--transition-hover);
+
+  /* Staggered entrance animation */
+  opacity: 0;
+  animation: archReveal 0.8s ease both;
+}
+
+.arch-card:nth-child(1) { animation-delay: 0.1s; }
+.arch-card:nth-child(2) { animation-delay: 0.25s; }
+.arch-card:nth-child(3) { animation-delay: 0.4s; }
+.arch-card:nth-child(4) { animation-delay: 0.55s; }
+
+/* The warm inner glow — looks like light from inside the room */
+.arch-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 60%;
+  background: radial-gradient(ellipse at bottom, rgba(201, 168, 76, 0.15) 0%, transparent 70%);
+  transition: opacity var(--transition-hover);
+}
+
+.arch-card:hover::before {
+  opacity: 2; /* Intensifies the glow on hover */
+}
+
+.arch-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: rgba(201, 168, 76, 0.4);
+  box-shadow: 0 0 40px rgba(201, 168, 76, 0.2),
+              0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Roman numeral at the top of the arch */
+.arch-card__numeral {
+  position: absolute;
+  top: var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 300;
+  color: rgba(201, 168, 76, 0.5);
+  letter-spacing: 0.1em;
+  transition: color var(--transition-hover);
+}
+
+.arch-card:hover .arch-card__numeral {
+  color: var(--accent-gold);
+}
+
+/* The category icon / symbol */
+.arch-card__icon {
+  font-size: 2rem;
+  color: rgba(201, 168, 76, 0.4);
+  margin-bottom: var(--space-2);
+  transition: color var(--transition-hover);
+  position: relative;
+  z-index: 1;
+}
+
+.arch-card:hover .arch-card__icon {
+  color: var(--accent-gold);
+}
+
+/* Category title */
+.arch-card__title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 300;
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Category subtitle */
+.arch-card__subtitle {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: 4px;
+  padding: 0 var(--space-2);
+  line-height: 1.4;
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ════════════════════════════════════════
+   ALBUM FRAME CARD (Screen 5)
+   Each album looks like a framed piece on a wall.
+   ════════════════════════════════════════ */
+
+.album-frame {
+  cursor: pointer;
+  transition: transform var(--transition-hover);
+  opacity: 0;
+  animation: riseIn 0.7s ease both;
+}
+
+.album-frame:nth-child(1) { animation-delay: 0.05s; }
+.album-frame:nth-child(2) { animation-delay: 0.15s; }
+.album-frame:nth-child(3) { animation-delay: 0.25s; }
+.album-frame:nth-child(4) { animation-delay: 0.35s; }
+.album-frame:nth-child(5) { animation-delay: 0.45s; }
+.album-frame:nth-child(6) { animation-delay: 0.55s; }
+
+.album-frame:hover {
+  transform: translateY(-6px);
+}
+
+/* The picture frame itself */
+.album-frame__border {
+  box-shadow: var(--frame-shadow-default);
+  transition: box-shadow var(--transition-hover);
+  background: var(--frame-color);
+  padding: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.album-frame:hover .album-frame__border {
+  box-shadow: var(--frame-shadow-hover);
+}
+
+/* Inner mat board (the off-white mount inside a real frame) */
+.album-frame__mat {
+  background: #1a1614;
+  padding: 4px;
+  overflow: hidden;
+}
+
+/* The thumbnail image */
+.album-frame__img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.album-frame:hover .album-frame__img {
+  transform: scale(1.03);
+}
+
+/* Museum placard below the frame */
+.album-placard {
+  background: var(--placard-bg);
+  color: var(--placard-text);
+  padding: var(--space-2) var(--space-2);
+  margin-top: var(--space-2);
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
+.album-placard__title {
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: var(--placard-text);
+  margin-bottom: 4px;
+}
+
+.album-placard__date {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: rgba(26, 24, 20, 0.55);
+  margin-bottom: 4px;
+}
+
+.album-placard__count {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  color: rgba(26, 24, 20, 0.4);
+  font-weight: 300;
+}
+
+
+/* ════════════════════════════════════════
+   GALLERY ITEM FRAME (Screen 6)
+   Individual photos and videos on the wall.
+   ════════════════════════════════════════ */
+
+.gallery-item {
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+  --frame-tilt: 0deg; /* JS sets this per item */
+  transform: rotate(var(--frame-tilt));
+  transition: transform var(--transition-hover),
+              filter var(--transition-hover);
+  opacity: 0;
+  animation: frameRise 0.8s ease both;
+  animation-fill-mode: forwards;
+}
+
+.gallery-item:hover {
+  /* Straighten slightly on hover, feels natural */
+  transform: rotate(calc(var(--frame-tilt) * 0.3)) translateY(-4px);
+  z-index: 10;
+  position: relative;
+}
+
+/* Photo frame border */
+.gallery-item__frame {
+  box-shadow: var(--frame-shadow-default);
+  background: var(--frame-color);
+  padding: 8px;
+  transition: box-shadow var(--transition-hover);
+}
+
+.gallery-item:hover .gallery-item__frame {
+  box-shadow: var(--frame-shadow-hover);
+}
+
+/* Video frames glow and pulse */
+.gallery-item--video .gallery-item__frame {
+  animation: videoGlow 3s ease-in-out infinite;
+}
+
+/* Inner mat */
+.gallery-item__mat {
+  background: #0f0e0c;
+  padding: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-item__img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* Play button overlay for videos */
+.gallery-item__play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.25);
+  transition: background var(--transition-hover);
+}
+
+.gallery-item:hover .gallery-item__play {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item__play-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(201, 168, 76, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-gold);
+  font-size: 1.4rem;
+  padding-left: 4px; /* Optical center for play triangle */
+  backdrop-filter: blur(4px);
+  background: rgba(26, 24, 20, 0.4);
+  transition: all var(--transition-hover);
+}
+
+.gallery-item:hover .gallery-item__play-icon {
+  border-color: var(--accent-gold);
+  background: rgba(201, 168, 76, 0.2);
+  box-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
+}
+
+/* Gallery museum placard */
+.gallery-placard {
+  background: var(--placard-bg);
+  color: var(--placard-text);
+  padding: var(--space-1) var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.gallery-placard__caption {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-base);
+  font-weight: 400;
+  color: var(--placard-text);
+  margin-bottom: 3px;
+  line-height: 1.3;
+}
+
+.gallery-placard__meta {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: rgba(26, 24, 20, 0.45);
+  margin-bottom: 3px;
+}
+
+.gallery-placard__number {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  color: rgba(26, 24, 20, 0.3);
+  font-weight: 300;
+}
+
+
+/* ════════════════════════════════════════
+   LIGHTBOX (Full-screen photo viewer)
+   ════════════════════════════════════════ */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 9, 8, 0.97);
+  z-index: var(--z-lightbox);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: lightboxOpen 0.4s ease both;
+}
+
+.lightbox[hidden] {
+  display: none;
+}
+
+/* Close button (×) in the top-right */
+.lightbox__close {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  font-size: 2rem;
+  color: var(--text-secondary);
+  transition: color var(--transition-hover);
+  z-index: 10;
+  line-height: 1;
+  padding: var(--space-1);
+}
+
+.lightbox__close:hover {
+  color: var(--accent-gold);
+}
+
+/* Left/right navigation arrows */
+.lightbox__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--text-2xl);
+  color: rgba(168, 152, 128, 0.5);
+  padding: var(--space-2) var(--space-3);
+  transition: color var(--transition-hover);
+  z-index: 10;
+  font-family: var(--font-display);
+  font-weight: 300;
+}
+
+.lightbox__nav:hover {
+  color: var(--accent-gold);
+}
+
+.lightbox__nav--prev { left: var(--space-2); }
+.lightbox__nav--next { right: var(--space-2); }
+
+/* The photo + its label */
+.lightbox__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.lightbox__image {
+  max-height: 75vh;
+  max-width: 85vw;
+  object-fit: contain;
+  display: block;
+  animation: lightboxImageIn 0.4s ease both;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+}
+
+/* Museum-style label below the lightbox photo */
+.lightbox__placard {
+  text-align: center;
+  border-top: 1px solid rgba(168, 152, 128, 0.15);
+  padding-top: var(--space-2);
+  width: 100%;
+}
+
+.lightbox__caption {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-lg);
+  color: var(--text-primary);
+  font-weight: 300;
+}
+
+.lightbox__meta {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+
+/* ════════════════════════════════════════
+   VIDEO MODAL
+   ════════════════════════════════════════ */
+
+.video-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 7, 6, 0.98);
+  z-index: var(--z-video);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: lightboxOpen 0.4s ease both;
+}
+
+.video-modal[hidden] {
+  display: none;
+}
+
+.video-modal__close {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  font-size: 2rem;
+  color: var(--text-secondary);
+  transition: color var(--transition-hover);
+  z-index: 10;
+  padding: var(--space-1);
+}
+
+.video-modal__close:hover {
+  color: var(--accent-gold);
+}
+
+.video-modal__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  width: 90vw;
+  max-width: 960px;
+}
+
+/* The HTML5 video player — dark, minimal */
+.video-modal__player {
+  width: 100%;
+  max-height: 70vh;
+  background: #000;
+  outline: none;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+}
+
+.video-modal__placard {
+  text-align: center;
+  border-top: 1px solid rgba(168, 152, 128, 0.15);
+  padding-top: var(--space-2);
+  width: 100%;
+}
+
+.video-modal__caption {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-lg);
+  color: var(--text-primary);
+  font-weight: 300;
+}
+
+.video-modal__meta {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}

@@ -1,0 +1,689 @@
+/* ─────────────────────────────────────────
+   screens.css
+   
+   This file styles each of the 6 main screens.
+   
+   Screens work like layers — only one is visible
+   at a time. The "active" class makes a screen
+   visible; JavaScript adds and removes it.
+   ───────────────────────────────────────── */
+
+
+/* ── SHARED SCREEN FOUNDATION ────────────────── */
+
+/* Every screen takes up the full browser window */
+.screen {
+  position: fixed;          /* Pinned to the viewport, doesn't scroll */
+  inset: 0;                 /* Shorthand for top:0, right:0, bottom:0, left:0 */
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-dark);
+  opacity: 0;               /* Hidden by default */
+  pointer-events: none;     /* Can't be clicked when hidden */
+  transition: opacity var(--transition-screen);
+  overflow-y: auto;         /* Allow scrolling within a screen */
+  overflow-x: hidden;
+  z-index: var(--z-screen);
+}
+
+/* Making a screen visible */
+.screen.active {
+  opacity: 1;
+  pointer-events: all;
+  animation: screenFadeIn var(--transition-screen) ease both;
+}
+
+
+/* ════════════════════════════════════════
+   SCREEN 1: THE INVITATION (Password)
+   ════════════════════════════════════════ */
+
+#screen-password {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Contain the candle glows */
+}
+
+/* ── Candle glow effects in corners ── */
+/* These are absolutely positioned gradient blobs.
+   They animate independently to simulate flickering. */
+.candle-glow {
+  position: absolute;
+  width: 40vw;
+  height: 40vw;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.candle-glow--tl {
+  top: -15vw;
+  left: -15vw;
+  background: radial-gradient(circle, var(--candle-warm) 0%, var(--candle-ember) 40%, transparent 70%);
+  animation: candleFlickerTL 4s ease-in-out infinite;
+}
+
+.candle-glow--tr {
+  top: -15vw;
+  right: -15vw;
+  background: radial-gradient(circle, var(--candle-warm) 0%, var(--candle-ember) 40%, transparent 70%);
+  animation: candleFlickerTR 5s ease-in-out infinite;
+}
+
+.candle-glow--bl {
+  bottom: -15vw;
+  left: -15vw;
+  background: radial-gradient(circle, var(--candle-warm) 0%, var(--candle-ember) 40%, transparent 70%);
+  animation: candleFlickerBL 4.5s ease-in-out infinite;
+}
+
+.candle-glow--br {
+  bottom: -15vw;
+  right: -15vw;
+  background: radial-gradient(circle, var(--candle-warm) 0%, var(--candle-ember) 40%, transparent 70%);
+  animation: candleFlickerBR 3.8s ease-in-out infinite;
+}
+
+/* ── The center invitation content ── */
+.invitation-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  text-align: center;
+  position: relative; /* Sits above the candle glows */
+  z-index: 1;
+  padding: var(--space-4);
+}
+
+/* ── "YOU HAVE BEEN INVITED" label ── */
+.invitation-label {
+  font-family: var(--font-ui);
+  font-weight: 300;
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  animation: invitationAppear 2s ease both;
+  animation-delay: 0.5s;
+  opacity: 0; /* Start hidden; animation fills this in */
+  animation-fill-mode: forwards;
+}
+
+/* ── Wax seal (CSS-only art piece) ── */
+.wax-seal {
+  width: 90px;
+  height: 90px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: sealPulse 4s ease-in-out infinite;
+  cursor: default;
+}
+
+/* Outer ring of the seal */
+.wax-seal__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #d4a843, #8a6520 50%, #5a3e10);
+  box-shadow:
+    0 0 0 3px #5a3e10,
+    0 0 20px rgba(201, 168, 76, 0.3),
+    inset 0 2px 4px rgba(255, 220, 100, 0.3),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Decorative ridged edge of the seal */
+.wax-seal__ring::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 168, 67, 0.4);
+  box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.15);
+}
+
+/* The star symbol in the center of the seal */
+.wax-seal__inner {
+  position: relative;
+  z-index: 1;
+  font-size: 1.6rem;
+  color: rgba(255, 230, 140, 0.9);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+/* ── Password form ── */
+.password-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  max-width: 320px;
+}
+
+.password-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(168, 152, 128, 0.3);
+  padding: var(--space-2) var(--space-1);
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: 300;
+  color: var(--text-primary);
+  letter-spacing: 0.1em;
+  transition: border-color var(--transition-hover);
+  outline: none;
+}
+
+.password-input::placeholder {
+  color: rgba(168, 152, 128, 0.4);
+  font-style: italic;
+}
+
+.password-input:focus {
+  border-bottom-color: var(--accent-gold);
+}
+
+/* Error state — border turns amber */
+.password-input.error {
+  border-bottom-color: var(--accent-gold);
+  animation: shake 0.5s ease both;
+  color: var(--accent-gold);
+}
+
+/* Error message below the input */
+.password-error {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  color: var(--accent-gold);
+  opacity: 0; /* Hidden until there's an error */
+  transition: opacity 0.3s ease;
+  text-transform: uppercase;
+  min-height: 1.2em; /* Reserve space so layout doesn't jump */
+}
+
+.password-error.visible {
+  opacity: 1;
+}
+
+/* "ENTER THE EXHIBITION →" button */
+.enter-btn {
+  margin-top: var(--space-1);
+  padding: var(--space-1) var(--space-4);
+  background: transparent;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  color: var(--text-secondary);
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 300;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--transition-hover);
+}
+
+.enter-btn:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+
+/* ════════════════════════════════════════
+   SCREEN 2: THE WELCOME CARD
+   ════════════════════════════════════════ */
+
+#screen-welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+  padding: var(--space-4);
+}
+
+/* The warm radial glow pulsing behind the card */
+.welcome-glow {
+  position: absolute;
+  width: 600px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(201, 168, 76, 0.12) 0%, transparent 70%);
+  animation: glowBreath 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* The physical card element */
+.welcome-card {
+  position: relative;
+  background: var(--placard-bg);
+  color: var(--placard-text);
+  max-width: 480px;
+  width: 100%;
+  padding: var(--space-6) var(--space-5);
+  text-align: center;
+
+  /* Multiple shadows create the illusion of a thick card on a table */
+  box-shadow:
+    0 2px 0 #e8e0d0,
+    0 4px 0 #d8d0c0,
+    0 6px 0 #c8c0b0,
+    0 20px 60px rgba(0, 0, 0, 0.7),
+    0 40px 80px rgba(0, 0, 0, 0.4);
+
+  opacity: 0; /* Hidden; animation reveals it */
+  animation: cardReveal 1.5s ease both;
+  animation-delay: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+.welcome-card__prelude {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: rgba(26, 24, 20, 0.5);
+  margin-bottom: var(--space-2);
+}
+
+.welcome-card__name {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  color: var(--placard-text);
+  margin-bottom: var(--space-3);
+}
+
+.welcome-card__rule {
+  width: 60px;
+  height: 1px;
+  background: rgba(26, 24, 20, 0.25);
+  margin: 0 auto var(--space-3);
+}
+
+.welcome-card__quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-lg);
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(26, 24, 20, 0.75);
+  margin-bottom: var(--space-4);
+}
+
+.welcome-card__footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.welcome-card__heart {
+  font-size: 1.2rem;
+  color: rgba(26, 24, 20, 0.4);
+  display: block;
+}
+
+.welcome-card__curator {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: rgba(26, 24, 20, 0.5);
+}
+
+/* "Enter the Gallery →" link below the card */
+.enter-gallery-link {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  opacity: 0;
+  animation: linkAppear 1s ease both;
+  animation-delay: 2s;
+  animation-fill-mode: forwards;
+  transition: color var(--transition-hover);
+  cursor: pointer;
+}
+
+.enter-gallery-link:hover {
+  color: var(--accent-gold);
+}
+
+
+/* ════════════════════════════════════════
+   SCREEN 3: GRAND ENTRANCE (Intro)
+   ════════════════════════════════════════ */
+
+#screen-intro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer; /* Clicking skips the intro */
+}
+
+.intro-center {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* The exhibition title — each letter is wrapped in a <span> by JS */
+.intro-title {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
+  line-height: 1;
+  /* The shimmer effect uses a moving gradient as the text "color" */
+  background: linear-gradient(
+    90deg,
+    var(--text-primary) 0%,
+    var(--text-primary) 35%,
+    var(--accent-gold) 50%,
+    var(--text-primary) 65%,
+    var(--text-primary) 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldShimmer 4s linear infinite;
+  animation-delay: 1.5s;
+}
+
+/* Each individual letter gets its own reveal animation with a delay */
+.intro-title .letter {
+  display: inline-block;
+  opacity: 0;
+  animation: letterReveal 0.6s ease both;
+  /* The animation-delay is set per-letter by JavaScript */
+}
+
+.intro-subtitle {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  opacity: 0;
+  animation: subtitleFade 1s ease both;
+  animation-delay: 1.8s;
+  animation-fill-mode: forwards;
+}
+
+.intro-year {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 300;
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-secondary);
+  opacity: 0;
+  animation: yearAppear 1s ease both;
+  animation-delay: 2.2s;
+  animation-fill-mode: forwards;
+}
+
+
+/* ════════════════════════════════════════
+   SCREEN 4: THE GALLERY ROOMS
+   ════════════════════════════════════════ */
+
+#screen-rooms {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6) var(--space-4);
+  gap: var(--space-6);
+}
+
+.rooms-header {
+  text-align: center;
+  z-index: 1;
+}
+
+.rooms-header__label {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-1);
+}
+
+.rooms-header__title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 300;
+  color: var(--text-primary);
+  letter-spacing: 0.06em;
+}
+
+/* 4 archways in a row */
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 1000px;
+  z-index: 1;
+}
+
+
+/* ════════════════════════════════════════
+   SCREEN 5: INSIDE A ROOM (Album List)
+   ════════════════════════════════════════ */
+
+#screen-room-detail {
+  position: fixed;
+  padding: var(--space-5) var(--space-5) var(--space-7);
+}
+
+.room-detail-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+  position: relative;
+  z-index: 1;
+}
+
+.room-detail-header__text {
+  flex: 1;
+}
+
+.room-detail-header__label {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.room-detail-header__title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 300;
+  color: var(--text-primary);
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.room-detail-header__subtitle {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-md);
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+/* Thin golden horizontal rule */
+.room-detail-rule {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent-gold), transparent);
+  margin-bottom: var(--space-4);
+  opacity: 0.4;
+  position: relative;
+  z-index: 1;
+}
+
+/* Album search input */
+.album-search-wrap {
+  margin-bottom: var(--space-4);
+  position: relative;
+  z-index: 1;
+}
+
+.album-search {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(168, 152, 128, 0.2);
+  padding: var(--space-1) 0;
+  width: 280px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  outline: none;
+  transition: border-color var(--transition-hover);
+}
+
+.album-search::placeholder {
+  color: rgba(168, 152, 128, 0.3);
+}
+
+.album-search:focus {
+  border-bottom-color: var(--accent-gold);
+}
+
+/* Album grid: 3 columns desktop */
+.albums-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6) var(--space-5);
+  position: relative;
+  z-index: 1;
+}
+
+.albums-empty {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--text-secondary);
+  text-align: center;
+  padding: var(--space-7) 0;
+  font-size: var(--text-lg);
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ════════════════════════════════════════
+   SCREEN 6: THE EXHIBITION ROOM (Gallery)
+   ════════════════════════════════════════ */
+
+#screen-gallery {
+  position: fixed;
+  padding: var(--space-5) var(--space-5) var(--space-7);
+}
+
+.gallery-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+  position: relative;
+  z-index: 1;
+}
+
+.gallery-header__placard {
+  flex: 1;
+}
+
+.gallery-header__title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 300;
+  color: var(--text-primary);
+  letter-spacing: 0.04em;
+}
+
+.gallery-header__date {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.gallery-header-rule {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent-gold), transparent);
+  margin-bottom: var(--space-5);
+  opacity: 0.4;
+  position: relative;
+  z-index: 1;
+}
+
+/* Masonry layout using CSS columns — no JavaScript needed */
+.gallery-masonry {
+  columns: 3;        /* 3 columns on desktop */
+  column-gap: var(--space-5);
+  position: relative;
+  z-index: 1;
+}
+
+/* Each item inside the masonry prevents column-breaking mid-frame */
+.gallery-masonry > * {
+  break-inside: avoid;
+  margin-bottom: var(--space-5);
+}
+
+
+/* ── SHARED BACK BUTTON ─────────────────── */
+.back-btn {
+  font-family: var(--font-ui);
+  font-size: var(--text-xl);
+  color: var(--text-secondary);
+  padding: var(--space-1);
+  flex-shrink: 0;
+  margin-top: 6px;
+  transition: color var(--transition-hover);
+  line-height: 1;
+}
+
+.back-btn:hover {
+  color: var(--accent-gold);
+}
+
+
+/* ── WALL TEXTURE OVERLAY ───────────────── */
+/* CSS-only grain/noise texture using an SVG data URI as pseudo-element.
+   This adds warmth to the wall backgrounds without any image files. */
+.wall-texture {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  /* The SVG below creates a noise pattern by using turbulence (feTurbulence).
+     It's encoded directly into the CSS so no external file is needed. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.5;
+}

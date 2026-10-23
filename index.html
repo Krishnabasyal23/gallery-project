@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Year in Frames</title>
+
+  <!-- Google Fonts: Cormorant Garamond for elegance, Inter for UI clarity -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+
+  <!-- CSS files, loaded in order of dependency -->
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/screens.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════
+    SCREEN 1: THE INVITATION (Password)
+    This is the first thing she sees.
+    ═══════════════════════════════════════ -->
+  <section id="screen-password" class="screen active">
+
+    <!-- Candlelight glow effects in corners (CSS animated, no images) -->
+    <div class="candle-glow candle-glow--tl"></div>
+    <div class="candle-glow candle-glow--tr"></div>
+    <div class="candle-glow candle-glow--bl"></div>
+    <div class="candle-glow candle-glow--br"></div>
+
+    <div class="invitation-center">
+      <!-- Wax seal (built entirely with CSS) -->
+      <div class="wax-seal" aria-hidden="true">
+        <div class="wax-seal__ring"></div>
+        <div class="wax-seal__inner">✦</div>
+      </div>
+
+      <p class="invitation-label">You Have Been Invited</p>
+
+      <form class="password-form" id="password-form" onsubmit="return false;">
+        <input
+          type="password"
+          id="password-input"
+          class="password-input"
+          placeholder="Enter the password"
+          autocomplete="current-password"
+          aria-label="Exhibition password"
+        />
+        <p class="password-error" id="password-error" aria-live="polite">
+          This exhibition is private.
+        </p>
+        <button type="submit" class="enter-btn" id="enter-btn">
+          Enter the Exhibition &rarr;
+        </button>
+      </form>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+       SCREEN 2: THE WELCOME CARD
+       Shows once, never again.
+       ═══════════════════════════════════════ -->
+  <section id="screen-welcome" class="screen">
+    <!-- Warm glow behind the card -->
+    <div class="welcome-glow" aria-hidden="true"></div>
+
+    <div class="welcome-card" id="welcome-card">
+      <p class="welcome-card__prelude">A private exhibition, curated for</p>
+      <h1 class="welcome-card__name" id="welcome-name">Sofia</h1>
+      <div class="welcome-card__rule"></div>
+      <p class="welcome-card__quote" id="welcome-quote">
+        Every moment we kept, now yours to revisit.
+      </p>
+      <div class="welcome-card__footer">
+        <span class="welcome-card__heart" aria-hidden="true">♡</span>
+        <p class="welcome-card__curator">
+          Curated by <span id="welcome-curator">Your Name</span>
+        </p>
+      </div>
+    </div>
+
+    <a href="#" class="enter-gallery-link" id="enter-gallery-link">
+      Enter the Gallery &rarr;
+    </a>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+       SCREEN 3: GRAND ENTRANCE (Intro)
+       Cinematic title moment.
+       ═══════════════════════════════════════ -->
+  <section id="screen-intro" class="screen">
+    <div class="intro-center" id="intro-center">
+      <h1 class="intro-title" id="intro-title"></h1>
+      <p class="intro-subtitle">A Year in Frames</p>
+      <p class="intro-year" id="intro-year">MMXXIV</p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+       SCREEN 4: THE GALLERY ROOMS
+       Four archway doors to choose from.
+       ═══════════════════════════════════════ -->
+  <section id="screen-rooms" class="screen">
+    <!-- CSS grain texture overlay -->
+    <div class="wall-texture" aria-hidden="true"></div>
+
+    <header class="rooms-header">
+      <p class="rooms-header__label">The Exhibition</p>
+      <h2 class="rooms-header__title" id="rooms-title">A Year in Frames</h2>
+    </header>
+
+    <!-- The 4 archway doorways are injected here by gallery.js -->
+    <div class="rooms-grid" id="rooms-grid" role="list">
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+       SCREEN 5: INSIDE A ROOM (Album List)
+       Albums displayed as framed art on a wall.
+       ═══════════════════════════════════════ -->
+  <section id="screen-room-detail" class="screen">
+    <div class="wall-texture" aria-hidden="true"></div>
+
+    <header class="room-detail-header">
+      <button class="back-btn" id="back-to-rooms" aria-label="Back to gallery rooms">
+        &larr;
+      </button>
+      <div class="room-detail-header__text">
+        <p class="room-detail-header__label" id="room-detail-label">Room I</p>
+        <h2 class="room-detail-header__title" id="room-detail-title">Journeys</h2>
+        <p class="room-detail-header__subtitle" id="room-detail-subtitle">Everywhere the road took us</p>
+      </div>
+    </header>
+
+    <div class="room-detail-rule"></div>
+
+    <!-- Album search filter -->
+    <div class="album-search-wrap">
+      <input
+        type="search"
+        id="album-search"
+        class="album-search"
+        placeholder="Filter albums..."
+        aria-label="Search albums"
+      />
+    </div>
+
+    <!-- Album grid — injected by gallery.js -->
+    <div class="albums-grid" id="albums-grid" role="list">
+    </div>
+
+    <!-- Empty state message -->
+    <p class="albums-empty" id="albums-empty" hidden>
+      No albums found in this room yet.
+    </p>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+       SCREEN 6: THE EXHIBITION ROOM (Gallery)
+       Photos and videos hung on the wall.
+       ═══════════════════════════════════════ -->
+  <section id="screen-gallery" class="screen">
+    <div class="wall-texture" aria-hidden="true"></div>
+
+    <header class="gallery-header">
+      <button class="back-btn" id="back-to-room" aria-label="Back to room">
+        &larr;
+      </button>
+      <div class="gallery-header__placard">
+        <h2 class="gallery-header__title" id="gallery-album-title">Album Title</h2>
+        <p class="gallery-header__date" id="gallery-album-date">Date</p>
+      </div>
+    </header>
+
+    <div class="gallery-header-rule"></div>
+
+    <!-- Masonry grid of photos and videos — injected by gallery.js -->
+    <div class="gallery-masonry" id="gallery-masonry" role="list">
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+       LIGHTBOX OVERLAY
+       Full-screen photo viewer.
+       ═══════════════════════════════════════ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+    <button class="lightbox__close" id="lightbox-close" aria-label="Close photo viewer">&times;</button>
+
+    <button class="lightbox__nav lightbox__nav--prev" id="lightbox-prev" aria-label="Previous photo">
+      &#8592;
+    </button>
+
+    <div class="lightbox__stage">
+      <img class="lightbox__image" id="lightbox-img" src="" alt="" />
+      <div class="lightbox__placard">
+        <p class="lightbox__caption" id="lightbox-caption"></p>
+        <p class="lightbox__meta" id="lightbox-meta">Photography</p>
+      </div>
+    </div>
+
+    <button class="lightbox__nav lightbox__nav--next" id="lightbox-next" aria-label="Next photo">
+      &#8594;
+    </button>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════
+       VIDEO MODAL OVERLAY
+       Full-screen video player.
+       ═══════════════════════════════════════ -->
+  <div class="video-modal" id="video-modal" role="dialog" aria-modal="true" aria-label="Video player" hidden>
+    <button class="video-modal__close" id="video-modal-close" aria-label="Close video">&times;</button>
+
+    <div class="video-modal__stage">
+      <video
+        class="video-modal__player"
+        id="video-player"
+        controls
+        playsinline
+      ></video>
+      <div class="video-modal__placard">
+        <p class="video-modal__caption" id="video-caption"></p>
+        <p class="video-modal__meta">Moving Image</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════
+       JAVASCRIPT — loaded in dependency order
+       config.js first (settings),
+       then data.js (loads JSON),
+       then the feature modules,
+       then app.js last (ties it all together)
+       ═══════════════════════════════════════ -->
+  <script src="config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/lightbox.js"></script>
+  <script src="js/video.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

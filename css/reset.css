@@ -1,0 +1,84 @@
+/* ─────────────────────────────────────────
+   reset.css
+   
+   Every browser (Chrome, Firefox, Safari) has
+   its own default styles. This file removes them
+   all so we start with a perfectly blank canvas.
+   Without this, buttons, headings, and margins
+   look different in every browser.
+   ───────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  /* Include padding and border in width/height calculations.
+     This makes layout math much more predictable. */
+  box-sizing: border-box;
+
+  /* Remove all default margins and padding */
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Prevent font size from changing when device is rotated */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  /* Make body fill the entire viewport height */
+  min-height: 100vh;
+
+  /* Prevent horizontal scrollbar from appearing accidentally */
+  overflow-x: hidden;
+
+  /* Smooth text rendering on Mac/retina screens */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Remove bullet points from lists */
+ul, ol {
+  list-style: none;
+}
+
+/* Remove underline from links by default */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Make images behave like block elements and never overflow their container */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Make buttons behave consistently across browsers */
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+/* Make inputs inherit the font from the page (browsers don't do this by default) */
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* Remove the default outline only for mouse users (keep it for keyboard nav) */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Keep a visible outline for keyboard users (accessibility) */
+:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 3px;
+}

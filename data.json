@@ -1,0 +1,188 @@
+{
+  "siteTitle": "A Year in Frames",
+  "recipientName": "Sofia",
+  "welcomeMessage": "Every moment we kept, now yours to revisit.",
+  "curatorName": "Your Name",
+  "year": "2024",
+  "categories": [
+    {
+      "id": "trips",
+      "romanNumeral": "I",
+      "title": "Journeys",
+      "subtitle": "Everywhere the road took us",
+      "icon": "✦",
+      "albums": [
+        {
+          "id": "greece-2024",
+          "title": "Somewhere Warm",
+          "date": "June 2024",
+          "thumbnail": "https://picsum.photos/seed/greece/600/400",
+          "items": [
+            {
+              "type": "photo",
+              "url": "https://picsum.photos/seed/greece1/1200/900",
+              "caption": "The light there was different"
+            },
+            {
+              "type": "photo",
+              "url": "https://picsum.photos/seed/greece2/900/1200",
+              "caption": "We stayed longer than planned"
+            },
+            {
+              "type": "photo",
+              "url": "https://picsum.photos/seed/greece3/1100/800",
+              "caption": "Every street led somewhere worth finding"
+            },
+            {
+              "type": "video",
+              "url": "https://www.w3schools.com/html/mov_bbb.mp4",
+              "caption": "The ferry, the fog, the way back"
+            }
+          ]
+        },
+        {
+          "id": "weekend-trip",
+          "title": "Two Days Away",
+          "date": "September 2024",
+          "thumbnail": "https://picsum.photos/seed/weekend/600/400",
+          "items": [
+            {
+              "type": "photo",
+              "url": "https://picsum.photos/seed/wk1/1200/800",
+              "caption": "No plan, just direction"
+            },
+            {
+              "type": "photo",
+              "url": "https://picsum.photos/seed/wk2/800/1100",
+              "caption": "Small town, slow afternoon"
+            },
+            {
+              "type": "photo",
+              "url": "https://picsum.photos/seed/wk3/1000/700",
+              "caption": "The road home looked like this"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ordinary",
+      "romanNumeral": "II",
+      "title": "Ordinary Days",
+      "subtitle": "The ones that felt like nothing at the time",
+      "icon": "◦",
+      "albums": [
+        {
+          "id": "random-moments",
+          "title": "Unplanned",
+          "date": "Various, 2024",
+          "thumbnail": "https://picsum.photos/seed/random/600/400",
+          "items": [
+            {
+              "type": "photo",
+              "url": "https://picsum.photos/seed/rand1/800/1000",
+              "caption": "Nothing was happening. Everything was happening."
+            },
+            {
+              "type": "photo",
+              "url": "https://picsum.photos/seed/rand2/1100/750",
+              "caption": "A window, an afternoon, nothing specific"
+            },
+            {
+              "type": "video",
+              "url": "https://www.w3schools.com/html/mov_bbb.mp4",
+              "caption": "A Tuesday that mattered"
+            }
+          ]
+        },
+        {
+          "id": "winter-mornings",
+          "title": "Winter Mornings",
+          "date": "January – February 2024",
+          "thumbnail": "https://picsum.photos/seed/winter/600/400",
+          "items": [
+            {
+              "type": "photo",
+              "url": "https://picsum.photos/seed/win1/900/1200",
+              "caption": "Cold enough to stay inside"
+            },
+            {
+              "type": "photo",
+              "url": "https://picsum.photos/seed/win2/1200/900",
+              "caption": "The city before everyone else woke up"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "events",
+      "romanNumeral": "III",
+      "title": "Celebrations",
+      "subtitle": "The nights worth remembering",
+      "icon": "✧",
+      "albums": [
+        {
+          "id": "birthday",
+          "title": "The Night of It",
+          "date": "March 2024",
+          "thumbnail": "https://picsum.photos/seed/birthday/600/400",
+          "items": [
+            {
+              "type": "photo",
+              "url": "https://picsum.photos/seed/bday1/1000/800",
+              "caption": "Before anyone else arrived"
+            },
+            {
+              "type": "photo",
+              "url": "https://picsum.photos/seed/bday2/800/1000",
+              "caption": "You didn't know I took this one"
+            },
+            {
+              "type": "video",
+              "url": "https://www.w3schools.com/html/mov_bbb.mp4",
+              "caption": "The room when it was full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bestof",
+      "romanNumeral": "IV",
+      "title": "The Favourites",
+      "subtitle": "If this was all we had, it would be enough",
+      "icon": "♡",
+      "albums": [
+        {
+          "id": "the-best",
+          "title": "Selected Works",
+          "date": "2024",
+          "thumbnail": "https://picsum.photos/seed/best/600/400",
+          "items": [
+            {
+              "type": "photo",
+              "url": "https://picsum.photos/seed/fav1/1200/900",
+              "caption": "This one first"
+            },
+            {
+              "type": "photo",
+              "url": "https://picsum.photos/seed/fav2/900/1200",
+              "caption": "And then this"
+            },
+            {
+              "type": "photo",
+              "url": "https://picsum.photos/seed/fav3/1100/800",
+              "caption": "The one I keep coming back to"
+            },
+            {
+              "type": "photo",
+              "url": "https://picsum.photos/seed/fav4/800/1000",
+              "caption": "Still can't explain why"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

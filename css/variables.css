@@ -1,0 +1,147 @@
+/* ─────────────────────────────────────────
+   variables.css
+   
+   This file defines every color, font, and spacing
+   value used across the entire site as "CSS custom
+   properties" (also called CSS variables).
+   
+   Think of this as the style dictionary.
+   Instead of writing "#1a1814" in 40 different places,
+   we write "var(--bg-dark)" everywhere — and if we ever
+   want to change the background color, we only change
+   it here, once.
+   ───────────────────────────────────────── */
+
+:root {
+  /* ── COLORS ─────────────────────────────── */
+
+  /* The main dark background — warm near-black, not cold blue-black */
+  --bg-dark: #1a1814;
+
+  /* Slightly lighter warm dark for cards and inner elements */
+  --bg-card: #211e1a;
+
+  /* The gallery wall — warm dark brown-black */
+  --bg-wall: #1e1b17;
+
+  /* Primary text — warm ivory, not harsh white */
+  --text-primary: #f5f0e8;
+
+  /* Secondary text — muted warm tan for labels and subtitles */
+  --text-secondary: #a89880;
+
+  /* The golden accent — amber gold used for all highlights */
+  --accent-gold: #c9a84c;
+
+  /* The same gold but very transparent — for glows */
+  --accent-glow: rgba(201, 168, 76, 0.2);
+
+  /* Deeper glow for hover states */
+  --accent-glow-strong: rgba(201, 168, 76, 0.35);
+
+  /* Dark warm brown for picture frames */
+  --frame-color: #2a2520;
+
+  /* The outer frame shadow color */
+  --frame-shadow: rgba(0, 0, 0, 0.7);
+
+  /* Cream/ivory for museum placard cards */
+  --placard-bg: #f5f0e8;
+
+  /* Dark ink color for text on placards */
+  --placard-text: #1a1814;
+
+  /* For the candle glow animations */
+  --candle-warm: rgba(201, 168, 76, 0.12);
+  --candle-ember: rgba(180, 100, 30, 0.08);
+
+
+  /* ── TYPOGRAPHY ─────────────────────────── */
+
+  /* Display font — used for exhibition titles, names, captions */
+  --font-display: 'Cormorant Garamond', 'Georgia', serif;
+
+  /* UI font — used for small labels, buttons, navigation */
+  --font-ui: 'Inter', 'Helvetica Neue', sans-serif;
+
+
+  /* ── FONT SIZES ──────────────────────────── */
+
+  /* Using a typographic scale — each step is about 1.25x the previous */
+  --text-xs: 0.7rem;       /* 11px — tiny labels */
+  --text-sm: 0.8rem;       /* 13px — secondary labels */
+  --text-base: 1rem;       /* 16px — body text */
+  --text-md: 1.2rem;       /* 19px — slightly large */
+  --text-lg: 1.5rem;       /* 24px — subheadings */
+  --text-xl: 2rem;         /* 32px — section titles */
+  --text-2xl: 2.8rem;      /* 45px — major headings */
+  --text-3xl: 4rem;        /* 64px — hero/exhibition titles */
+  --text-4xl: 5.5rem;      /* 88px — grand display titles */
+
+
+  /* ── LETTER SPACING ──────────────────────── */
+
+  /* Wide spacing used for all-caps labels */
+  --tracking-wide: 0.15em;
+  --tracking-widest: 0.25em;
+
+
+  /* ── SPACING ─────────────────────────────── */
+
+  /* Consistent spacing values (multiples of 8px) */
+  --space-1: 0.5rem;     /*  8px */
+  --space-2: 1rem;       /* 16px */
+  --space-3: 1.5rem;     /* 24px */
+  --space-4: 2rem;       /* 32px */
+  --space-5: 3rem;       /* 48px */
+  --space-6: 4rem;       /* 64px */
+  --space-7: 6rem;       /* 96px */
+  --space-8: 8rem;       /* 128px */
+
+
+  /* ── TRANSITIONS ─────────────────────────── */
+
+  /* Slow, deliberate transitions — nothing should feel snappy */
+  --transition-hover: 0.3s ease;
+  --transition-screen: 0.6s ease;
+  --transition-slow: 1s ease;
+
+
+  /* ── SHADOWS ─────────────────────────────── */
+
+  /* Multi-layer box-shadow to simulate a real picture frame */
+  --frame-shadow-default:
+    0 0 0 2px #3a3028,
+    0 0 0 6px #2a2520,
+    0 0 0 8px #1a1614,
+    8px 16px 40px rgba(0, 0, 0, 0.7),
+    0 2px 6px rgba(0, 0, 0, 0.4);
+
+  /* Frame shadow with gold glow on hover */
+  --frame-shadow-hover:
+    0 0 0 2px #4a3d28,
+    0 0 0 6px #2a2520,
+    0 0 0 8px #1a1614,
+    8px 20px 50px rgba(0, 0, 0, 0.8),
+    0 0 30px var(--accent-glow),
+    0 2px 6px rgba(0, 0, 0, 0.4);
+
+
+  /* ── BORDER RADIUS ───────────────────────── */
+
+  /* For the archway arch shape */
+  --arch-radius: 50% 50% 0 0 / 40% 40% 0 0;
+
+  /* General rounded corners */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+
+
+  /* ── Z-INDEX LAYERS ──────────────────────── */
+
+  /* Things higher up in this list appear on top of lower ones */
+  --z-screen: 10;
+  --z-overlay: 100;
+  --z-lightbox: 200;
+  --z-video: 300;
+}
